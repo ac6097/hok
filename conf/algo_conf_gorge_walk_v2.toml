@@ -1,0 +1,39 @@
+[dynamic_programming]
+actor_agent = "agent_dynamic_programming.agent.Agent"
+learner_agent = "agent_dynamic_programming.agent.Agent"
+aisrv_agent = "agent_dynamic_programming.agent.Agent"
+train_workflow = "agent_dynamic_programming.workflow.train_workflow.workflow"
+eval_workflow = "tools.eval.workflow.eval_workflow.workflow"
+exam_workflow = "tools.eval.workflow.exam_workflow.workflow"
+
+[monte_carlo]
+actor_agent = "agent_monte_carlo.agent.Agent"
+learner_agent = "agent_monte_carlo.agent.Agent"
+aisrv_agent = "agent_monte_carlo.agent.Agent"
+train_workflow = "agent_monte_carlo.workflow.train_workflow.workflow"
+eval_workflow = "tools.eval.workflow.eval_workflow.workflow"
+exam_workflow = "tools.eval.workflow.exam_workflow.workflow"
+
+[q_learning]
+actor_agent = "agent_q_learning.agent.Agent"
+learner_agent = "agent_q_learning.agent.Agent"
+aisrv_agent = "agent_q_learning.agent.Agent"
+train_workflow = "agent_q_learning.workflow.train_workflow.workflow"
+eval_workflow = "tools.eval.workflow.eval_workflow.workflow"
+exam_workflow = "tools.eval.workflow.exam_workflow.workflow"
+
+[sarsa]
+actor_agent = "agent_sarsa.agent.Agent"
+learner_agent = "agent_sarsa.agent.Agent"
+aisrv_agent = "agent_sarsa.agent.Agent"
+train_workflow = "agent_sarsa.workflow.train_workflow.workflow"
+eval_workflow = "tools.eval.workflow.eval_workflow.workflow"
+exam_workflow = "tools.eval.workflow.exam_workflow.workflow"
+
+[diy]
+actor_agent = "agent_diy.agent.Agent"
+learner_agent = "agent_diy.agent.Agent"
+aisrv_agent = "agent_diy.agent.Agent"
+train_workflow = "agent_diy.workflow.train_workflow.workflow"
+eval_workflow = "tools.eval.workflow.eval_workflow.workflow"
+exam_workflow = "tools.eval.workflow.exam_workflow.workflow"

@@ -1,0 +1,42 @@
+[env_conf]
+# The start point coordinates.
+# Array containing two integer elements [x, z], each coordinate ranges from 0 to 63.
+# The start point coordinates and the end point coordinates cannot be the same.
+# 起点坐标
+# 数组，包含两个整数元素[x, z]，每个坐标取值范围为0~63。
+# 起点坐标和终点坐标不能相同。
+start = [29, 9]
+
+# The end point coordinates.
+# Array containing two integer elements [x, z], each coordinate ranges from 0 to 63.
+# The start point coordinates and the end point coordinates cannot be the same.
+# 终点坐标
+# 数组，包含两个整数元素[x, z]，每个坐标取值范围为0~63。
+# 起点坐标和终点坐标不能相同。
+end = [11, 55]
+
+# Chest ID array. Each ID must be an integer in range 0~9.
+# Description: Configures the fixed chest IDs.
+# 宝箱ID数组。每个ID必须是整数，取值范围：0~9。
+# 配置固定宝箱的ID。
+treasure_id = []
+
+# Number of chests, only works when treasure_random = true.
+# Integer, range: 0~10.
+# 生成随机宝箱时的宝箱数量，仅在treasure_random = true时生效。
+# 整型，取值范围为0~10。
+treasure_count = 0
+
+# Is the chest random, boolean, false - fixed chest, true - random chest.
+# If fixed is enabled, use treasure_id to generate fixed chests.
+# If random is enabled, use treasure_count to randomly generate chests.
+# 是否生成随机宝箱，布尔值，false表示固定宝箱，true表示随机宝箱。
+# 若开启固定，则使用treasure_id生成固定宝箱。
+# 若开启随机，则使用treasure_count生成随机宝箱。
+treasure_random = false
+
+# Integer, Value range: 1~2000.
+# Description: Max step.
+# 整型，取值范围1~2000。
+# 最大步数。
+max_step = 2000
