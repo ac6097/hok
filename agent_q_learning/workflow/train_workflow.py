@@ -8,10 +8,10 @@ Author: Tencent AI Arena Authors
 """
 
 import time
-import math
 import os
 from common_python.utils.common_func import Frame
 from agent_q_learning.feature.definition import sample_process, reward_shaping
+from agent_q_learning.conf.conf import Config
 from tools.train_env_conf_validate import read_usr_conf
 from tools.metrics_utils import get_training_metrics
 from common_python.utils.workflow_disaster_recovery import handle_disaster_recovery
@@ -37,12 +37,18 @@ def workflow(envs, agents, logger=None, monitor=None, *args, **kwargs):
             return
 
         env, agent = envs[0], agents[0]
-        EPISODES = 10000
+        EPISODES = Config.EPISODES
+
+        env_conf = usr_conf.get("env_conf", {}) if isinstance(usr_conf, dict) else {}
+        if env_conf.get("treasure_random", False):
+            target_treasures = int(env_conf.get("treasure_count", 0))
+        else:
+            target_treasures = len(env_conf.get("treasure_id", []))
 
         # Initialize monitoring data
         # 初始化监控数据
         monitor_data = {
-            "reward": 0,
+            "reward": 0.0,
         }
         last_report_monitor_time = 0
         last_get_training_metrics_time = 0
@@ -57,6 +63,7 @@ def workflow(envs, agents, logger=None, monitor=None, *args, **kwargs):
         episode_count = 0
         win_count = 0
 
+        episode = -1
         for episode in range(EPISODES):
             # Retrieve training metrics every 15 seconds
             # 每15秒获取训练指标
@@ -82,12 +89,22 @@ def workflow(envs, agents, logger=None, monitor=None, *args, **kwargs):
             # Episode loop
             # 回合循环
             done = False
-            agent.epsilon = 1.0
+            current_treasure_count = 0
+            episode_progress = min(1.0, float(episode) / max(1.0, float(Config.EPSILON_DECAY_EPISODES)))
+            base_epsilon = Config.EPSILON_START - (Config.EPSILON_START - Config.EPSILON_END) * episode_progress
+            base_epsilon = max(Config.EPSILON_END, base_epsilon)
 
             while not done:
-                # Decay exploration rate exponentially
-                # 指数衰减探索率
-                agent.epsilon = max(0.1, agent.epsilon * math.exp(-(1 / EPISODES) * episode))
+                # Keep a persistent exploration probability and boost it when many treasures are still missing.
+                agent.epsilon = base_epsilon
+                if target_treasures > 0 and current_treasure_count < target_treasures:
+                    step_no = int(env_obs.get("observation", {}).get("step_no", 0))
+                    if step_no >= Config.EXPLORE_BOOST_START_STEP:
+                        missing_ratio = float(target_treasures - current_treasure_count) / float(target_treasures)
+                        agent.epsilon = min(
+                            Config.EPSILON_UNKNOWN_BOOST_MAX,
+                            base_epsilon + Config.EPSILON_UNKNOWN_BOOST * missing_ratio,
+                        )
 
                 # Select action using epsilon-greedy policy
                 # 使用epsilon-greedy策略选择动作
@@ -108,6 +125,8 @@ def workflow(envs, agents, logger=None, monitor=None, *args, **kwargs):
                     break
 
                 terminated, truncated = next_env_obs["terminated"], next_env_obs["truncated"]
+                game_info = next_env_obs.get("observation", {}).get("game_info", {})
+                current_treasure_count = int(game_info.get("treasure_count", 0))
 
                 # Process next observation
                 # 处理下一个观测
@@ -141,6 +160,7 @@ def workflow(envs, agents, logger=None, monitor=None, *args, **kwargs):
                 # 更新累积奖励并转移到下一个状态
                 total_reward += reward
                 obs_data = next_obs_data
+                env_obs = next_env_obs
 
             # Update episode counter
             # 更新回合计数器
