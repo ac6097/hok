@@ -1,0 +1,110 @@
+Traceback (most recent call last):
+
+  File "/root/.local/share/code-server/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          │    │              │    │       │    └ {}
+          │    │              │    │       └ <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7fd776ef4990>
+          │    │              │    └ ()
+          │    │              └ <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7fd776ef4990>
+          │    └ <bound method Thread._bootstrap of <KaiWuRLStandardHelper(kaiwu_rl_helper_0, started daemon 140562711594752)>>
+          └ <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7fd776ef4990>
+
+  File "/usr/lib64/python3.11/threading.py", line 1002, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x7fd7b3eaade0>
+    └ <KaiWuRLStandardHelper(kaiwu_rl_helper_0, started daemon 140562711594752)>
+  File "/usr/lib64/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+    │    └ <function KaiWuRLStandardHelper.run at 0x7fd7772ba520>
+    └ <KaiWuRLStandardHelper(kaiwu_rl_helper_0, started daemon 140562711594752)>
+
+  File "/data/projects/gorge_chase/kaiwudrl/server/aisrv/kaiwu_rl_helper_standard.py", line 622, in run
+    self.workflow()
+    │    └ <function KaiWuRLStandardHelper.workflow at 0x7fd7772ba480>
+    └ <KaiWuRLStandardHelper(kaiwu_rl_helper_0, started daemon 140562711594752)>
+
+> File "/data/projects/gorge_chase/kaiwudrl/server/aisrv/kaiwu_rl_helper_standard.py", line 555, in workflow
+    AlgoConf.get_algo_conf(CONFIG.algo, "train_workflow")(
+    │        │             │      └ 'ppo'
+    │        │             └ <common_python.config.config_control.ConfigControl object at 0x7fd7ae233350>
+    │        └ <function _AlgoConf.get_algo_conf at 0x7fd794074540>
+    └ <kaiwudrl.common.config.algo_conf._AlgoConf object at 0x7fd7940d9f90>
+
+  File "/data/projects/gorge_chase/agent_ppo/workflow/train_workflow.py", line 50, in workflow
+    for g_data in episode_runner.run_episodes():
+                  │              └ <function EpisodeRunner.run_episodes at 0x7fd772735080>
+                  └ <agent_ppo.workflow.train_workflow.EpisodeRunner object at 0x7fd77db1bad0>
+
+  File "/data/projects/gorge_chase/agent_ppo/workflow/train_workflow.py", line 195, in run_episodes
+    act_data = self.agent.predict(list_obs_data=[obs_data])[0]
+               │    │     │                      └ ObsData(feature=[0.484375, 0.4140625, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.046875, -0.078125, 0.33333334, 0.0644304...
+               │    │     └ <function BaseAgent._install_method_interceptors.<locals>.make_wrapper.<locals>.wrapper at 0x7fd776ca4680>
+               │    └ <agent_ppo.agent.Agent object at 0x7fd776c78510>
+               └ <agent_ppo.workflow.train_workflow.EpisodeRunner object at 0x7fd77db1bad0>
+
+TypeError: 'NoneType' object is not subscriptable
+2026-04-25 00:27:21.470 | ERROR | PID:1647 | kaiwu_rl_helper_standard.workflow:596 - aisrv kaiwu_rl_helper workflow() Exception 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+
+  File "/root/.local/share/code-server/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          │    │              │    │       │    └ {}
+          │    │              │    │       └ <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7fd776ef4990>
+          │    │              │    └ ()
+          │    │              └ <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7fd776ef4990>
+          │    └ <bound method Thread._bootstrap of <KaiWuRLStandardHelper(kaiwu_rl_helper_0, started daemon 140562711594752)>>
+          └ <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7fd776ef4990>
+
+  File "/usr/lib64/python3.11/threading.py", line 1002, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x7fd7b3eaade0>
+    └ <KaiWuRLStandardHelper(kaiwu_rl_helper_0, started daemon 140562711594752)>
+  File "/usr/lib64/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+    │    └ <function KaiWuRLStandardHelper.run at 0x7fd7772ba520>
+    └ <KaiWuRLStandardHelper(kaiwu_rl_helper_0, started daemon 140562711594752)>
+
+  File "/data/projects/gorge_chase/kaiwudrl/server/aisrv/kaiwu_rl_helper_standard.py", line 622, in run
+    self.workflow()
+    │    └ <function KaiWuRLStandardHelper.workflow at 0x7fd7772ba480>
+    └ <KaiWuRLStandardHelper(kaiwu_rl_helper_0, started daemon 140562711594752)>
+
+> File "/data/projects/gorge_chase/kaiwudrl/server/aisrv/kaiwu_rl_helper_standard.py", line 555, in workflow
+    AlgoConf.get_algo_conf(CONFIG.algo, "train_workflow")(
+    │        │             │      └ 'ppo'
+    │        │             └ <common_python.config.config_control.ConfigControl object at 0x7fd7ae233350>
+    │        └ <function _AlgoConf.get_algo_conf at 0x7fd794074540>
+    └ <kaiwudrl.common.config.algo_conf._AlgoConf object at 0x7fd7940d9f90>
+
+  File "/data/projects/gorge_chase/agent_ppo/workflow/train_workflow.py", line 50, in workflow
+    for g_data in episode_runner.run_episodes():
+                  │              └ <function EpisodeRunner.run_episodes at 0x7fd772735080>
+                  └ <agent_ppo.workflow.train_workflow.EpisodeRunner object at 0x7fd77db1bad0>
+
+  File "/data/projects/gorge_chase/agent_ppo/workflow/train_workflow.py", line 195, in run_episodes
+    act_data = self.agent.predict(list_obs_data=[obs_data])[0]
+               │    │     │                      └ ObsData(feature=[0.484375, 0.4140625, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.046875, -0.078125, 0.33333334, 0.0644304...
+               │    │     └ <function BaseAgent._install_method_interceptors.<locals>.make_wrapper.<locals>.wrapper at 0x7fd776ca4680>
+               │    └ <agent_ppo.agent.Agent object at 0x7fd776c78510>
+               └ <agent_ppo.workflow.train_workflow.EpisodeRunner object at 0x7fd77db1bad0>
+
+TypeError: 'NoneType' object is not subscriptable
+2026-04-25 00:27:21.481 | INFO | PID:1647 | kaiwu_rl_helper_standard.workflow:604 - aisrv kaiwu_rl_helper aisrv send process_stop_request 1 to learner success
+2026-04-25 00:27:21.481 | INFO | PID:1647 | kaiwu_rl_helper_standard.workflow:604 - aisrv kaiwu_rl_helper aisrv send process_stop_request 1 to learner success
+2026-04-25 00:27:21.483 | INFO | PID:1647 | kaiwu_rl_helper_standard.workflow:606 - aisrv kaiwu_rl_helper finally
+2026-04-25 00:27:21.483 | INFO | PID:1647 | kaiwu_rl_helper_standard.workflow:606 - aisrv kaiwu_rl_helper finally
+2026-04-25 00:27:21.836 | INFO | PID:1644 | reverb_util.__init__:52 - aisrv learner_proxy reverb client Client, server_address=127.0.0.1:9999 127.0.0.1:9999 connect to reverb server
+2026-04-25 00:27:21.839 | INFO | PID:1644 | learner_proxy.before_run:435 - learner_proxy reverb server is 127.0.0.1:9999, table_names is ['reverb_replay_buffer_table_0']
+2026-04-25 00:27:21.840 | INFO | PID:1644 | learner_proxy.before_run:491 - learner_proxy zmq client connect at 127.0.0.1:9997 with client_id 44497120
+2026-04-25 00:27:21.841 | INFO | PID:1644 | learner_proxy.before_run:506 - learner_proxy policy_name: train_one, start success at pid 1644
+2026-04-25 00:27:21.843 | INFO | PID:1644 | learner_proxy.msg_process_process_stop:619 - learner_proxy send process_stop data to learner
+2026-04-25 00:27:21.845 | INFO | PID:1287 | trainer.learner_process_message_by_aisrv:596 - learner train learner recv process_stop from aisrv 172.22.0.4_0, error_code 1
+2026-04-25 00:27:21.846 | INFO | PID:1287 | trainer.learner_process_message_by_aisrv:604 - learner train learner send process_stop result to aisrv 172.22.0.4_0
+2026-04-25 00:27:21.846 | INFO | PID:1644 | learner_proxy.msg_process_process_stop:630 - learner_proxy recv process_stop data result from learner success
+2026-04-25 00:27:21.847 | INFO | PID:1287 | trainer.learner_get_aisrv_address:478 - learner train get default aisrv_address success, aisrv address: ['127.0.0.1:8000']
+2026-04-25 00:27:21.848 | INFO | PID:1287 | trainer.learner_process_message_by_aisrv:619 - learner train learner recv error_code 1 from 172.22.0.4_0, so exit
+2026-04-25 00:27:21.850 | INFO | PID:1287 | model_file_common.process_stop_write_file:407 - learner process_stop_write_file, error_code is 1
+aisrv is alive
+Error found in file: /data/projects/gorge_chase/log/aisrv/aisrv_kaiwu_rl_helper_pid1647_log_2026-04-25-00.log
+Error content (line 13): {"time": "2026-04-25 00:27:21.154379", "level": "ERROR", "message": "aisrv predict() RuntimeError Exception", "file": "standard_agent_wrapper_pytorch.py", "line": "303", "module": "aisrv", "process": "standard_agent_wrapper_pytorch", "function": "_obs_dispatch", "stack": "Traceback (most recent call last):\n  File \"/data/projects/gorge_chase/kaiwudrl/common/algorithms/standard_agent_wrapper_pytorch.py\", line 294, in _obs_dispatch\n    values = getattr(self.agent, method_name)(data, framework=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/projects/gorge_chase/kaiwudrl/interface/none_agent.py\", line 99, in wrapper\n    return fname(self, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/projects/gorge_chase/kaiwudrl/interface/remote_agent.py\", line 535, in obs_method\n    return self._dispatch_obs_method(method_name, list_obs_data, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/projects/gorge_chase/kaiwudrl/interface/remote_agent.py\", line 374, in _dispatch_obs_method\n    return business_method(self, list_obs_data, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/projects/gorge_chase/agent_ppo/agent.py\", line 76, in predict\n    logits, value, prob = self._run_model(feature, legal_action)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/projects/gorge_chase/agent_ppo/agent.py\", line 143, in _run_model\n    logits, value = self.model(obs_tensor, inference=True)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib64/python3.11/site-packages/torch/nn/modules/module.py\", line 1501, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/projects/gorge_chase/agent_ppo/model/model.py\", line 93, in forward\n    x_s = self.relu(self.conv1(spatial))                        # (B, 16, 21, 21)\n                    ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib64/python3.11/site-packages/torch/nn/modules/module.py\", line 1501, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib64/python3.11/site-packages/torch/nn/modules/conv.py\", line 463, in forward\n    return self._conv_forward(input, self.weight, self.bias)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib64/python3.11/site-packages/torch/nn/modules/conv.py\", line 459, in _conv_forward\n    return F.conv2d(input, weight, bias, self.stride,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Input type (torch.cuda.FloatTensor) and weight type (torch.FloatTensor) should be the same\n", "pid": 1647}
+find error log, please check

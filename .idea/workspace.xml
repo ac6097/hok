@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8cd8fdc8-0310-46d1-812e-370aab22a6ca" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/code/报错信息.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/.idea/code.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/code/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/code/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/agent.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/algorithm/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/algorithm/algorithm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/conf/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/conf/conf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/conf/monitor_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/conf/train_env_conf.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/feature/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/feature/definition.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/model/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/model/model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/workflow/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_diy/workflow/train_workflow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/agent.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/algorithm/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/algorithm/algorithm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/conf/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/conf/conf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/conf/monitor_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/conf/train_env_conf.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/feature/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/feature/definition.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/feature/preprocessor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/model/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/model/model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/workflow/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/agent_ppo/workflow/train_workflow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/conf/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/conf/algo_conf_gorge_chase.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/conf/app_conf_gorge_chase.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/conf/configure_app.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/guide.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/kaiwu.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/train_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/峡谷追猎简介.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/license.dat" beforeDir="false" afterPath="$PROJECT_DIR$/license.dat" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_D:/hok" value="3BbrNAZnRL82kXXZ0238BvzpPfu" />
+    </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedChatMode">
+    <option name="chatModeId" value="Agent" />
+  </component>
+  <component name="CopilotUserSelectedModel">
+    <selectedModels>
+      <entry key="agent-panel" value="GPT-5.4 mini" />
+      <entry key="chat-panel" value="GPT-5.4 mini" />
+    </selectedModels>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ac6097&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ac6097/hok.git&quot;,
+    &quot;accountId&quot;: &quot;208bfd15-89d1-444d-9695-6209fcbefd74&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3BbrNAZnRL82kXXZ0238BvzpPfu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/hok/code/feature",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "terminal"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\hok\code\feature" />
+      <recent name="D:\hok\code\conf" />
+      <recent name="D:\hok\code" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-b63d5a1f7c97-b61e75351b1f-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.22158.340" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="8cd8fdc8-0310-46d1-812e-370aab22a6ca" name="更改" comment="" />
+      <created>1774768567463</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774768567463</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

@@ -1,0 +1,42 @@
+修改参数：
+NEW_CELL_REWARD = 0.005
+LOCAL_REPEAT_PENALTY = -0.01
+RECENT_LOOP_PENALTY = -0.03
+
+DANGER_PENALTY_SCALE = -0.12
+DANGER_DIST_THRESHOLD = 15.0
+
+修改reward设计：
+# 计算移动是否有收益
+delta_treasure = 0.0
+if self.last_nearest_treasure_dist is not None:
+    delta_treasure = self.last_nearest_treasure_dist - nearest_treasure_dist
+
+delta_monster = 0.0
+if self.last_min_monster_dist is not None:
+    delta_monster = min_monster_dist - self.last_min_monster_dist
+
+useful_move = False
+
+if new_cell_flag > 0.5:
+    useful_move = True
+
+if delta_treasure > 0.5:
+    useful_move = True
+
+if delta_monster > 0.5:
+    useful_move = True
+
+然后重复相关 reward：
+
+# 新格子奖励，减小一点
+if new_cell_flag > 0.5:
+    reward += Config.NEW_CELL_REWARD
+
+# 只有无收益时才惩罚局部重复
+if local_visit_density > 0.5 and not useful_move:
+    reward += Config.LOCAL_REPEAT_PENALTY * local_visit_density
+
+# 只有无收益时才惩罚短循环
+if recent_loop_score > 0.5 and not useful_move:
+    reward += Config.RECENT_LOOP_PENALTY * recent_loop_score

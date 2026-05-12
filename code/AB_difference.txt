@@ -1,0 +1,157 @@
+一、两版最本质的不同
+1）特征设计思路不同
+
+A版的观测是 3487 维：3255 维 legacy 主干，加 232 维扩展结构化特征；里面有 7 通道局部地图、4 步历史、flash-dir 48、move-dir 48、treasure-slot 100、buff-plan 20、dense 16，明显是“动作条件规划特征”思路。
+
+B版的观测只有 1819 维，由 55 维标量 和 4×21×21 的空间图组成。标量里直接放了英雄状态、阶段信息、两只怪的相对位置和方向、最近 3 个宝箱、2 个 buff、安全指标（开阔度、死角、包夹角）以及少量历史；空间图也只保留通行、宝箱、buff、怪物热力四个通道。它明显更“紧凑”和“语义直接”。
+
+这意味着：
+A版表达能力更强，但冗余和学习难度也更大；B版表达能力没那么花哨，但更容易把“哪些信息最重要”学清楚。
+
+2）模型复杂度不同
+
+A版模型是：局部地图 CNN + 结构化 MLP + 4步 GRU + 扩展结构分支 + gated residual + treasure_move_head。它不只是 actor/critic，还专门多了一个 treasure move 辅助头，并且在推理时会把这个头的输出融合回移动动作。
+
+B版模型则是标准很多的：空间 CNN 一条路、标量 MLP 一条路，最后融合成 actor/critic，没有 GRU、没有扩展规划分支、没有 treasure aux head。
+
+这意味着：
+A版理论上更有潜力学复杂行为；B版更容易训稳、更不容易出现“学到一半 critic/actor 一起打架”。
+
+3）训练逻辑不同
+
+A版是“从头训练 + treasure-first 调度”：
+它有 MOVE_ONLY_WARMUP_EPISODES=200，前期先屏蔽闪现；终局奖励从 3 升到 5；每步还把 total_score 和 treasure_score 的增量直接加进 reward；同时 learner 还带了 advantage normalization、熵衰减和低权重 treasure aux loss。
+
+B版是“课程学习 + 验证拆分”：
+前 2000 局纯生存、无宝箱无 buff；然后再逐步引入资源、恢复标准难度、最后做 harder generalization；还固定把地图 1–8 当训练，9–10 当验证，并定期跑 val。
+
+这意味着：
+A版是在完整任务上做较复杂的训练调度；B版是在环境层面直接把任务拆难度，这通常对平均分更友好。
+
+4）奖励设计不同
+
+A版 reward 非常丰富，包含 treasure bonus、safe treasure search、approach、miss penalty、revisit、oscillation、stagnation、flash 等一大串 shaping，再裁剪到 [-5,5]，workflow 里还额外叠加 score bonus。
+
+B版 reward 明显更“生存主线化”：生存、怪物距离 shaping、接近宝箱/接近 buff、开阔度、死角、危险、包夹、重复访问、撞墙、闪现脱险/滥用，再加很强的终局 ±15。另外，B版还用 _compute_safety() 对 treasure/buff approach 做安全调制：如果宝箱方向和怪物方向太一致、如果是死角、或者已经过了 speedup，treasure approach 会被明显压低。
+
+这意味着：
+A版更鼓励“会搜箱的行为细节”；B版更擅长防止“为了箱子送死”。对平均分来说，B版天然更稳。
+
+二、为什么 B 版更容易打到 1300
+1）它把学习问题简化了
+
+B版从 3487 维降到 1819 维，模型也从“CNN+MLP+GRU+扩展分支+aux head”降成了“CNN+MLP 融合”。这会直接减少样本复杂度、训练噪声和优化冲突。你们之前一直被样本生产消耗比、value loss 震荡、策略目标打架困扰，B版这种简化，本身就更容易把平均分练高。
+
+2）它把“先活下来”这件事做得更彻底
+
+B版的 curriculum 第一阶段直接把 treasure 和 buff 清空、monster interval/speedup 推到 2000、max_step 设 500，本质上就是强行先学生存；同时终局奖励用 ±15，比 A版前期 ±3~5 强得多。我的判断是，B版 1300 分的提升，很大一部分来自它把生存底座重新打牢了。
+
+3）它的安全建模更直接
+
+B版没有像 A版那样把“危险—探索—宝箱—闪现—前沿”全堆进一个大 reward，而是显式做了：
+
+corridor score
+dead-end score
+encirclement angle
+monster heat
+_compute_safety() 对 treasure approach 的门控。
+
+这类设计对平均分特别有效，因为它更容易学出“别把自己送进死路、别在怪和箱子同向时硬吃箱子”。这类“少犯错”的改进，往往比“更会贪”更能抬总分。
+
+4）它的训练信号更单纯
+
+A版除了 PPO 主损失，还有 treasure aux loss、entropy decay、score bonus、move-only warmup、terminal warmup；B版基本就是标准 PPO-Clip，外加课程学习和简单监控。也就是说，B版赢在“优化更简单”，不是“算法更先进”。
+
+三、两版各自真正的优势
+A版的优势
+
+A版最大的强项不是稳，而是细粒度行为表达能力。
+
+它有：
+
+move-dir / flash-dir 这种动作条件特征；
+4 步 history GRU；
+treasure aux head 和 inference 融合；
+直接把 total_score / treasure_score 增量并入 reward；
+move-only warmup，让“先学走、后学闪”更细。
+
+所以 A版的长处是：
+
+它更像一套“能学会边逃边捡、路线更细、动作更聪明”的框架。
+只是这套能力目前被训练难度和目标冲突压住了。
+
+B版的优势
+
+B版的强项不是细，而是稳、干净、好训。
+
+它有：
+
+更小更直接的特征；
+更简单的 CNN+MLP 模型；
+safety/corridor/dead-end/encirclement 这种直观安全语义；
+curriculum learning；
+训练/验证地图拆分。
+
+所以 B版的长处是：
+
+它更像一套“更容易学出高平均分、不容易训练崩”的工程基线。
+
+四、二者最值得互补的点
+
+我不建议简单“二选一”。
+最好的方向是：以 B 为骨架，以 A 为外挂。
+
+最值得保留的 B 版部分
+
+我建议保留 B版的这三样作为主框架：
+
+1819 维 compact 特征设计思路
+CNN+MLP 简单主干
+curriculum + val split
+因为这三样是它能稳定打到 1300 的底盘。
+最值得从 A 版借过来的部分
+
+我建议只借 A版里真正高价值、但不会把系统重新搞重的那部分：
+
+动作条件 treasure/move 小头
+A版最珍贵的是“动作级规划视角”，不是它那整套大分支本身。可以保留一个轻量版 action-conditioned head，只对 8 个移动方向做额外评分，而不是把整个 232 维扩展分支和 GRU 全抬回来。
+score 对齐思想
+A版把 total_score / treasure_score 增量并进 reward，这个方向是对的，只是原来加得太多、太复杂。建议在 B版上只保留一个小权重版本，别恢复整套 treasure-first 训练逻辑。
+阶段性动作控制
+A版的 move-only warmup 是有价值的，但不用像原来那样长。可以把它变成 B版 curriculum 里 stage 2 的一个局部策略。
+五、我建议的“融合版”长什么样
+主体
+
+用 B版：
+
+1819 维输入框架
+CNN+MLP 主干
+curriculum + validation
+safety/corridor/dead-end/encirclement reward 主线。
+外挂
+
+只加一个小型 A版动作头：
+
+不恢复 GRU
+不恢复大 expand 分支
+不恢复大 map-plan
+只增加一个轻量 move-action head，用来评估“这一步边逃边捡值不值”。
+
+也就是把 A版最有价值的“动作条件判断能力”接进 B版，而不是把 A 整套复杂系统抬回来。
+
+reward
+
+保留 B版简单 reward 主线，
+但加一个很小的 A式 score 对齐项：
+
+小权重 delta_treasure_score
+小权重 delta_total_score
+
+只做对齐，不做主导。
+
+六、一句话总结
+
+B版赢在“稳、简、容易把平均分做高”；A版赢在“细、会规划、潜力更像你们想要的边逃边捡”。
+最优路线不是回到 A，也不是只守着 B，而是：
+
+用 B 版当稳定底盘，用 A 版的动作条件规划能力做轻量增强。
